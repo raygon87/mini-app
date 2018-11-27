@@ -12,13 +12,13 @@ class ClientComp extends Component {
         }
     }
 
-    fetchData = () => {
-        fetch('http://localhost:5000')
-            .then(response => response.json())
-            .then(data => {
-                console.log(data)
-            })
-    }
+    // addNewClient = () => {
+    //     fetch('http://localhost:5000/client')
+    //         .then(response => response.json())
+    //         .then(data => {
+    //             console.log(data)
+    //         })
+    // }
 
     onClick = () => {
         this.setState({ display: 'client-card' });
@@ -26,6 +26,7 @@ class ClientComp extends Component {
 
     onClicknew = () => {
         this.setState({ display: 'new-client-card' });
+        
       }
 
     render() {
@@ -47,7 +48,6 @@ class ClientComp extends Component {
                     Client Name: <input className="client-input"></input>
                     <button type="client-submit" onClick={this.onClick}>Submit</button>
                 </div>
-                <button onClick={this.fetchData}>fetch</button>
                 <div> { toShow }</div>
                 <button onClick={this.onClicknew}>Add New</button><br></br>
             </div>
