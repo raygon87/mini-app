@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import "./App.css";
-import ClientcardComp from "./ClientcardComp";
+import ClientCardComp from "./ClientCardComp";
 import ClientnewcardComp from "./ClientnewcardComp";
 
 
@@ -8,20 +8,24 @@ class ClientComp extends Component {
     constructor() {
         super()
         this.state = {
-          display: ''
+          display: '',
+          input: ''
         }
     }
 
-    // addNewClient = () => {
-    //     fetch('http://localhost:5000/client')
-    //         .then(response => response.json())
-    //         .then(data => {
-    //             console.log(data)
-    //         })
-    // }
 
     onClick = () => {
         this.setState({ display: 'client-card' });
+        fetch(`http://localhost:5000/client/${this.state.input}`)
+            .then(response => response.json())
+            .then(data => {
+                console.log(data)
+            })
+            .catch(err => console.log(err,'error'))
+    }
+
+    onChange = () => {
+        this.setState({input: document.getElementById('searchInput').value})
     }
 
     onClicknew = () => {
@@ -34,7 +38,7 @@ class ClientComp extends Component {
         if (this.state.display === 'client-card') {
             toShow = 
             <div className="container">
-                <ClientcardComp name="client-card"/>
+                <ClientCardComp name="client-card"/>
             </div>
         } else if (this.state.display === 'new-client-card') {
             toShow = 
@@ -45,7 +49,7 @@ class ClientComp extends Component {
         return (
             <div className="client-cardbox">
                 <div className="client-header">
-                    Client Name: <input className="client-input"></input>
+                    Client Name: <input id='searchInput'  onChange={this.onChange} className="client-input"></input>
                     <button type="client-submit" onClick={this.onClick}>Submit</button>
                 </div>
                 <div> { toShow }</div>

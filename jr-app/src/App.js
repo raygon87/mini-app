@@ -14,6 +14,12 @@ class App extends Component {
 
   onClick = () => {
     this.setState({ display: 'clients' });
+    fetch(`http://localhost:5000/clients`)
+      .then(response => response.json())
+      .then(data => {
+          console.log(data)
+      })
+      .catch(err => console.log(err,'error'))
   }
 
   onClickInv = () => {

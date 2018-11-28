@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import "./App.css";
 
-class ClientcardComp extends Component {
+class ClientCardComp extends Component {
     render() {
         return (
             <div className="client-card">
@@ -20,4 +20,4 @@ class ClientcardComp extends Component {
         )};
 }
 
-export default ClientcardComp;
+export default ClientCardComp;

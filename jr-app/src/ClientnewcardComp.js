@@ -31,12 +31,6 @@ class ClientnewcardComp extends Component {
         this.setState({lastNameInput: document.getElementById('second').value})   
     }
 
-    // onSubmit = () => {
-    //     let firstName = this.state.firstNameInput;
-    //     let lastName = this.state.lastNameInput;
-    // }
-
-
     render() {
         return (
             <div className="client-new-card">
