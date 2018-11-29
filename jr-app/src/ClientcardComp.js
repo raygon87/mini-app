@@ -3,23 +3,25 @@ import "./App.css";
 
 class ClientCardComp extends Component {
     constructor(props) {
-        super()
+        super(props)
     }
     
     render() {
         return (
-            
-            <div className="client-card">
-                <div className="client-name">
-                    <h1>{this.props.firstName}</h1><h1>{this.props.lastName}</h1> 
-                </div>
-                <div className="client-form">
-                    First Name: <input placeholder="Joe"></input><br></br>
-                    Last Name: <input placeholder="Dirt"></input>
-                </div>
-                <div className="client-card-buttons">
-                    <button className="client-update">Update</button>
-                    <button className="client-update">Delete</button>
+            <div className='cardListContainer'>
+                <div className="client-card">
+                    <div className="client-name">
+                        <h3>{this.props.firstName}</h3> 
+                        <h3>{this.props.lastName}</h3> 
+                    </div>
+                    <div className="client-form">
+                        First Name: <input placeholder="Joe"></input><br></br>
+                        Last Name: <input placeholder="Dirt"></input>
+                    </div>
+                    <div className="client-card-buttons">
+                        <button className="client-buttons">Update</button>
+                        <button className="client-buttons">Delete</button>
+                    </div>
                 </div>
             </div>
         )};

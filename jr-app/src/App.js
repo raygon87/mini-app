@@ -9,19 +9,24 @@ class App extends Component {
     super()
     this.state = {
       display: '',
-      clients: null
+      searchField: ''
     }
-    this.clients = ''
+    this.clients = 
+      fetch(`http://localhost:5000/clients`)
+      .then(response => response.json())
+      .then(data => {
+        this.clients = data.clients
+      })
+      .catch(err => console.log(err,'error'))
   }
 
   componentDidMount() {
-    fetch(`http://localhost:5000/clients`)
-      .then(response => response.json())
-      .then(data => {
-        this.clients = data
-      })
-      .catch(err => console.log(err,'error'))
-      
+    // fetch(`http://localhost:5000/clients`)
+    //   .then(response => response.json())
+    //   .then(data => {
+    //     this.clients.push(data)
+    //   })
+    //   .catch(err => console.log(err,'error'))
   }
 
   onClick = () => {
@@ -29,11 +34,11 @@ class App extends Component {
     // fetch(`http://localhost:5000/clients`)
     //   .then(response => response.json())
     //   .then(data => {
-    //       this.setState({clients: data})
-    //       console.log('state',this.state.clients)
+    //     this.clients = data
+    //     console.log(this.clients)
     //   })
     //   .catch(err => console.log(err,'error'))
-    console.log(this.clients)
+      
   }
 
   onClickInv = () => {
@@ -46,7 +51,7 @@ class App extends Component {
     if(this.state.display === 'clients') {
       toShow = 
         <div className="container">
-            <ClientListComp clients={this.clients} name="clients"/>
+            <ClientListComp clients={this.clients}/>
         </div>
     } else if (this.state.display === 'invoices') {
       toShow = 
@@ -64,6 +69,8 @@ class App extends Component {
             <h1 onClick={this.onClick}>Clients</h1>
             <h1 onClick={this.onClickInv}>Invoices</h1>
           </div>
+          
+          {/* show clientlist or invoicde */}
           <div> {toShow} </div>
         </div>
       </div>

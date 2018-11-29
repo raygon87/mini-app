@@ -27,8 +27,11 @@ class NewClientInputComp
         })
     }
 
-    onChange = (e) => {
+    onChangeFirst = (e) => {
         this.setState({firstNameInput: document.getElementById('first').value})
+    }
+
+    onChangeLast = (e) => {
         this.setState({lastNameInput: document.getElementById('second').value})   
     }
 
@@ -36,8 +39,8 @@ class NewClientInputComp
         return (
             <div className="client-new-card">
                 <div className="client-form">
-                    First Name: <input id='first' onChange={this.onChange} placeholder="First Name"></input><br></br>
-                    Last Name: <input id='second' onChange={this.onChange} placeholder="Last Name"></input>
+                    First Name: <input id='first' onChange={this.onChangeFirst} placeholder="First Name"></input><br></br>
+                    Last Name: <input id='second' onChange={this.onChangeLast} placeholder="Last Name"></input>
                 </div>
                 <div className="client-new-card-buttons">
                 <button onClick={this.onSubmit} className="client-add">Add</button>

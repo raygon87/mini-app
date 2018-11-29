@@ -6,25 +6,24 @@ import NewClientInputComp from "./NewClientInputComp";
 
 class ClientListComp extends Component {
     constructor(props) {
-        super()
+        super(props)
         this.state = {
           display: '',
-          input: '',
+          searchField: '',
         }
-        this.clientList = []
     }
 
-    onClick = () => {
-        this.setState({ display: 'client-card' });
-        fetch(`http://localhost:5000/client/${this.state.input}`)
-            .then(response => response.json())
-            .then(data => {
-                console.log(data)
-            })
-            .catch(err => console.log(err,'error'))
-    }
+    // onClick = () => {
+    //     this.setState({ display: 'client-card' });
+    //     fetch(`http://localhost:5000/client/${this.state.input}`)
+    //         .then(response => response.json())
+    //         .then(data => {
+    //             console.log(data)
+    //         })
+    //         .catch(err => console.log(err,'error'))
+    // }
 
-    onChange = () => {
+    onSearchChange = () => {
         this.setState({input: document.getElementById('searchInput').value})
     }
 
@@ -34,6 +33,10 @@ class ClientListComp extends Component {
 
 
     render() {
+        const {searchField} = this.state;
+        const filteredClient = this.props.clients.filter(client => {
+        return client.first_name.includes(searchField);
+        });
         let toShow;
         if (this.state.display === 'client-card') {
             toShow = 
@@ -47,29 +50,21 @@ class ClientListComp extends Component {
             </div>
         }
 
-        this.props.clients['clients'].forEach(client => {
-            this.clientList.push(client)
-        })
+        console.log(this.props.clients)
 
         return (
-            <div className="client-cardbox">
-                <div>
-                    Search Client: <input id='searchInput'  onChange={this.onChange} className="client-input"></input>
+            <div className='clientbox'>
+                    Search Client: <input id='searchInput'  onChange={this.onSearchChange} className="client-input"></input>
+                   
                     <button onClick={this.onClicknew}>Add New</button><br></br>
+                    <div> { toShow }</div>
+                <div className="client-cardbox">
                     {
-                    this.clientList.map((client, i) => {
-                        console.log(client,i)
+                    this.props.clients.map((client, i) => {
                         return <ClientCardComp key={i} id={client.id} firstName={client.first_name} lastName={client.last_name}/>
-                       
                      })
                     }
                 </div>
-                <div className="client-header">
-                    Client Name: <input id='searchInput'  onChange={this.onChange} className="client-input"></input>
-                    <button type="client-submit" onClick={this.onClick}>Submit</button>
-                </div>
-                <div> { toShow }</div>
-                <button onClick={this.onClicknew}>Add New</button><br></br>
             </div>
         );
     }
