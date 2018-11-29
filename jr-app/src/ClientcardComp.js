@@ -2,11 +2,16 @@ import React, { Component } from 'react';
 import "./App.css";
 
 class ClientCardComp extends Component {
+    constructor(props) {
+        super()
+    }
+    
     render() {
         return (
+            
             <div className="client-card">
                 <div className="client-name">
-                    <h1>Joe</h1><h1>Dirt</h1> 
+                    <h1>{this.props.firstName}</h1><h1>{this.props.lastName}</h1> 
                 </div>
                 <div className="client-form">
                     First Name: <input placeholder="Joe"></input><br></br>

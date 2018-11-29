@@ -1,25 +1,39 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import ClientComp from './ClientComp';
+import ClientListComp from './ClientListComp';
 import InvoiceComp from './InvoiceComp';
 
 class App extends Component {
   constructor() {
     super()
     this.state = {
-      display: ''
+      display: '',
+      clients: null
     }
+    this.clients = ''
+  }
+
+  componentDidMount() {
+    fetch(`http://localhost:5000/clients`)
+      .then(response => response.json())
+      .then(data => {
+        this.clients = data
+      })
+      .catch(err => console.log(err,'error'))
+      
   }
 
   onClick = () => {
     this.setState({ display: 'clients' });
-    fetch(`http://localhost:5000/clients`)
-      .then(response => response.json())
-      .then(data => {
-          console.log(data)
-      })
-      .catch(err => console.log(err,'error'))
+    // fetch(`http://localhost:5000/clients`)
+    //   .then(response => response.json())
+    //   .then(data => {
+    //       this.setState({clients: data})
+    //       console.log('state',this.state.clients)
+    //   })
+    //   .catch(err => console.log(err,'error'))
+    console.log(this.clients)
   }
 
   onClickInv = () => {
@@ -32,7 +46,7 @@ class App extends Component {
     if(this.state.display === 'clients') {
       toShow = 
         <div className="container">
-            <ClientComp name="clients"/>
+            <ClientListComp clients={this.clients} name="clients"/>
         </div>
     } else if (this.state.display === 'invoices') {
       toShow = 

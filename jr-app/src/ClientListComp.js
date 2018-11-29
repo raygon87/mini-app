@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
 import "./App.css";
 import ClientCardComp from "./ClientCardComp";
-import ClientnewcardComp from "./ClientnewcardComp";
+import NewClientInputComp from "./NewClientInputComp";
 
 
-class ClientComp extends Component {
-    constructor() {
+class ClientListComp extends Component {
+    constructor(props) {
         super()
         this.state = {
           display: '',
-          input: ''
+          input: '',
         }
+        this.clientList = []
     }
-
 
     onClick = () => {
         this.setState({ display: 'client-card' });
@@ -30,24 +30,40 @@ class ClientComp extends Component {
 
     onClicknew = () => {
         this.setState({ display: 'new-client-card' });
-        
       }
+
 
     render() {
         let toShow;
         if (this.state.display === 'client-card') {
             toShow = 
             <div className="container">
-                <ClientCardComp name="client-card"/>
+                <ClientCardComp clients={this.props.clients} name="client-card"/>
             </div>
         } else if (this.state.display === 'new-client-card') {
             toShow = 
             <div className="container">
-                <ClientnewcardComp name="new-client-card"/>
+                <NewClientInputComp name="new-client-card"/>
             </div>
         }
+
+        this.props.clients['clients'].forEach(client => {
+            this.clientList.push(client)
+        })
+
         return (
             <div className="client-cardbox">
+                <div>
+                    Search Client: <input id='searchInput'  onChange={this.onChange} className="client-input"></input>
+                    <button onClick={this.onClicknew}>Add New</button><br></br>
+                    {
+                    this.clientList.map((client, i) => {
+                        console.log(client,i)
+                        return <ClientCardComp key={i} id={client.id} firstName={client.first_name} lastName={client.last_name}/>
+                       
+                     })
+                    }
+                </div>
                 <div className="client-header">
                     Client Name: <input id='searchInput'  onChange={this.onChange} className="client-input"></input>
                     <button type="client-submit" onClick={this.onClick}>Submit</button>
@@ -59,4 +75,4 @@ class ClientComp extends Component {
     }
 }
 
-export default ClientComp;
+export default ClientListComp;

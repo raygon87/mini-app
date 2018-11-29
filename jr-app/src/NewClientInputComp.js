@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import "./App.css";
 
-class ClientnewcardComp extends Component {
+class NewClientInputComp
+ extends Component {
     constructor() {
         super()
         this.state = {
@@ -45,4 +46,5 @@ class ClientnewcardComp extends Component {
         )};
 }
 
-export default ClientnewcardComp;
+export default NewClientInputComp
+;
