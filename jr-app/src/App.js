@@ -9,7 +9,8 @@ class App extends Component {
     super()
     this.state = {
       display: '',
-      searchField: ''
+      searchField: '',
+      clients: ''
     }
     this.clients = 
       fetch(`http://localhost:5000/clients`)
@@ -20,25 +21,17 @@ class App extends Component {
       .catch(err => console.log(err,'error'))
   }
 
-  componentDidMount() {
-    // fetch(`http://localhost:5000/clients`)
-    //   .then(response => response.json())
-    //   .then(data => {
-    //     this.clients.push(data)
-    //   })
-    //   .catch(err => console.log(err,'error'))
-  }
+  // fetchClients = () => {
+  //   fetch(`http://localhost:5000/clients`)
+  //     .then(response => response.json())
+  //     .then(data => {
+  //       this.setState({clients: data})
+  //     })
+  //     .catch(err => console.log(err,'error'))
+  // }
 
-  onClick = () => {
+  onClickClients = () => {
     this.setState({ display: 'clients' });
-    // fetch(`http://localhost:5000/clients`)
-    //   .then(response => response.json())
-    //   .then(data => {
-    //     this.clients = data
-    //     console.log(this.clients)
-    //   })
-    //   .catch(err => console.log(err,'error'))
-      
   }
 
   onClickInv = () => {
@@ -66,7 +59,7 @@ class App extends Component {
         </header>
         <div className="body">
           <div className="headings">
-            <h1 onClick={this.onClick}>Clients</h1>
+            <h1 onClick={this.onClickClients}>Clients</h1>
             <h1 onClick={this.onClickInv}>Invoices</h1>
           </div>
           

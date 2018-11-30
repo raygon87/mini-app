@@ -4,7 +4,8 @@ from flask_cors import CORS
 from datetime import datetime
 
 app = Flask(__name__)
-CORS(app)
+#CORS(app)
+cors = CORS(app, resources={r"/*": {"origins": "*"}})
 
 app.config['SECRET_KEY'] = 'secret'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
@@ -51,7 +52,7 @@ def add_client():
     new_client = Client(first_name=first, last_name=last)
     db.session.add(new_client)
     db.session.commit()
-    return jsonify({'message': 'new client created'})
+    return jsonify({'newClient': 'new client created'})
 
 # get clients by name
 @app.route('/client/<name>')
@@ -84,7 +85,8 @@ def get_client(id):
     return jsonify({'client': client_data})
 
 # update client
-@app.route('/client/<id>', methods=['PUT'])
+
+@app.route('/client/<int:id>', methods=['PUT', 'GET'])
 def update_client(id):
     client = Client.query.filter_by(id=id).first()
 
@@ -100,7 +102,7 @@ def update_client(id):
     client_data = {}
     client_data['first_name'] =  client.first_name
     client_data['last_name'] = client.last_name
-    return jsonify({'client':client_data})
+    return jsonify({'message':'client has been updated'})
 
 # delete client
 @app.route('/client/<id>', methods=['DELETE'])

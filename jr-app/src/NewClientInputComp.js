@@ -3,7 +3,7 @@ import "./App.css";
 
 class NewClientInputComp
  extends Component {
-    constructor() {
+    constructor(props) {
         super()
         this.state = {
             firstNameInput:'',
@@ -12,19 +12,24 @@ class NewClientInputComp
     }
 
     onSubmit = () => {
-        console.log('in function')
-        fetch('http://localhost:5000/client', {
-            method: 'post',
-            headers: {'Content-type': 'application/json'},
-            body: JSON.stringify({
-                first_name: this.state.firstNameInput,
-                last_name: this.state.lastNameInput
+        if(this.state.firstNameInput !== '' && this.state.lastNameInput !== '') {
+            fetch('http://localhost:5000/client', {
+                method: 'post',
+                headers: {'Content-type': 'application/json'},
+                body: JSON.stringify({
+                    first_name: this.state.firstNameInput,
+                    last_name: this.state.lastNameInput
+                })
             })
-        })
-        .then(response => response.json())
-        .then(data => {
-            console.log(data)
-        })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data)
+            
+            })
+        }
+        else {
+            alert('Check the input fields!')
+        }
     }
 
     onChangeFirst = (e) => {
@@ -36,6 +41,7 @@ class NewClientInputComp
     }
 
     render() {
+        console.log(this.props.fetchClients)
         return (
             <div className="client-new-card">
                 <div className="client-form">
