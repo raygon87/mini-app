@@ -13,16 +13,6 @@ class ClientListComp extends Component {
         }
     }
 
-    // onClick = () => {
-    //     this.setState({ display: 'client-card' });
-    //     fetch(`http://localhost:5000/client/${this.state.input}`)
-    //         .then(response => response.json())
-    //         .then(data => {
-    //             console.log(data)
-    //         })
-    //         .catch(err => console.log(err,'error'))
-    // }
-
     onSearchChange = () => {
         this.setState({input: document.getElementById('searchInput').value})
     }
@@ -33,10 +23,10 @@ class ClientListComp extends Component {
 
 
     render() {
-        const {searchField} = this.state;
-        const filteredClient = this.props.clients.filter(client => {
-        return client.first_name.includes(searchField);
-        });
+        // const {searchField} = this.state;
+        // const filteredClient = this.props.clients.filter(client => {
+        // return client.first_name.includes(searchField); 
+        // });
         let toShow;
         if (this.state.display === 'client-card') {
             toShow = 

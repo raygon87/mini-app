@@ -5,26 +5,30 @@ class ClientCardComp extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            first: this.props.firstName,
-            last: this.props.lastName
+            firstNameInput: '',
+            lastNameInput: '',
+            firstNameHeader: this.props.firstName,
+            lastNameHeader: this.props.lastName
         }
     }
     
     onUpdate = () => {
-        fetch(`http://localhost:5000/client/${this.props.id}`, {
-            method: 'put',
-            headers: {'Content-type': 'application/json'},
-            body: JSON.stringify({
-                first_name: this.state.first,
-                last_name: this.state.last
+        if(this.state.first !== '' & this.state.last !== '') {
+            fetch(`http://localhost:5000/client/${this.props.id}`, {
+                method: 'put',
+                headers: {'Content-type': 'application/json'},
+                body: JSON.stringify({
+                    first_name: this.state.firstNameInput,
+                    last_name: this.state.lastNameInput
+                })
             })
-        })
-        .then(response => response.json())
-        .then(data => {
-            console.log(data)
-            this.setState({first: this.state.first})
-            this.setState({first: this.state.last})
-        })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data)
+            })
+        } else {
+            alert('Please check the input fileds!')
+        }
     }
 
     onDelete = () => {
@@ -33,38 +37,46 @@ class ClientCardComp extends Component {
             method: 'delete',
             headers: {'Content-type': 'application/json'},
             body: JSON.stringify({
-                first_name: this.state.first,
-                last_name: this.state.last,
+                first_name: this.state.firstNameInput,
+                last_name: this.state.lastNameInput,
             })
         })
         .then(response => response.json())
         .then(data => {
             console.log(data)
         })
+        let deleted = document.querySelector('.client-card' + this.props.id)
+        deleted.remove()
     }
 
-
     onfirst = () => {
-        let firstInput = document.getElementById('firstInput').value
-        console.log(firstInput)
-        //this.setState({first: firstInput})
+        let firstNameInput = document.querySelector('.firstInput' + this.props.id).value
+        let firstNameHeader = document.querySelector('.firstInput' + this.props.id).value
+        this.setState({firstNameInput: firstNameInput})
+        this.setState({firstNameHeader: firstNameInput})
     }
 
     onlast = () => {
-        this.setState({last: document.getElementById('lastInput').value})   
-        console.log(this.state.last)
+        let lastNameInput = document.querySelector('.lastInput' + this.props.id).value
+        this.setState({lastNameInput: lastNameInput})
+        this.setState({lastNameHeader: lastNameInput})
     }
+
+    onDeleteClient = () => {
+        
+    }
+    
 
     render() {
         return (
-            <div className="client-card">
+            <div className={"client-card client-card" + this.props.id}>
                 <div className="client-name">
-                    <h3>{this.state.first}</h3> 
-                    <h3>{this.state.last}</h3> 
+                    <h3>{this.state.firstNameHeader}</h3> 
+                    <h3>{this.state.lastNameHeader}</h3>
                 </div>
                 <div className="client-form">
-                    First Name: <input id='firstInput' onChange={this.onfirst} placeholder={this.state.first}/><br></br>
-                    Last Name: <input id='lastInput' onChange={this.onlast} placeholder={this.state.last}/>
+                    First Name: <input className={'firstInput' + this.props.id} onChange={this.onfirst} placeholder={this.state.first}/><br></br>
+                    Last Name: <input className={'lastInput' + this.props.id} onChange={this.onlast} placeholder={this.state.last}/>
                 </div>
                 <div className="client-card-buttons">
                     <button onClick={this.onUpdate} className="client-buttons">Update</button>

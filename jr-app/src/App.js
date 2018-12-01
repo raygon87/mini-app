@@ -12,6 +12,7 @@ class App extends Component {
       searchField: '',
       clients: ''
     }
+    
     this.clients = 
       fetch(`http://localhost:5000/clients`)
       .then(response => response.json())
@@ -20,15 +21,6 @@ class App extends Component {
       })
       .catch(err => console.log(err,'error'))
   }
-
-  // fetchClients = () => {
-  //   fetch(`http://localhost:5000/clients`)
-  //     .then(response => response.json())
-  //     .then(data => {
-  //       this.setState({clients: data})
-  //     })
-  //     .catch(err => console.log(err,'error'))
-  // }
 
   onClickClients = () => {
     this.setState({ display: 'clients' });
