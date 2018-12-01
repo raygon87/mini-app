@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import "./App.css";
-import ClientCardComp from "./ClientCardComp";
-import NewClientInputComp from "./NewClientInputComp";
+import ClientCardComp from "../ClientCardComp/ClientCardComp";
+import NewClientComp from "../NewClientComp/NewClientComp";
+import './ClientListComp.css'
 
 
 class ClientListComp extends Component {
@@ -29,7 +29,7 @@ class ClientListComp extends Component {
 
     onClicknew = () => {
         this.setState({ display: 'new-client-card' });
-      }
+    }
 
 
     render() {
@@ -46,19 +46,17 @@ class ClientListComp extends Component {
         } else if (this.state.display === 'new-client-card') {
             toShow = 
             <div className="container">
-                <NewClientInputComp name="new-client-card"/>
+                <NewClientComp name="new-client-card"/>
             </div>
         }
 
-        console.log(this.props.clients)
-
         return (
             <div className='clientbox'>
-                    Search Client: <input id='searchInput'  onChange={this.onSearchChange} className="client-input"></input>
-                   
+                    Filter Client: <input id='searchInput'  onChange={this.onSearchChange} className="client-input"></input>
+                    {/* <NewClientComp name="new-client-card"/> */}
                     <button onClick={this.onClicknew}>Add New</button><br></br>
                     <div> { toShow }</div>
-                <div className="client-cardbox">
+                <div className="clientListContainer">
                     {
                     this.props.clients.map((client, i) => {
                         return <ClientCardComp key={i} id={client.id} firstName={client.first_name} lastName={client.last_name}/>

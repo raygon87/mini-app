@@ -1,0 +1,25 @@
+.client-card {
+    font-size: 16px;
+    margin-top: 10px;
+    margin-right: 5px;
+    border: 2px white solid;
+    height: 200px;
+    width: 200px;
+    margin: 10px;
+    padding: 10px;
+}
+
+.client-name {
+    display: flex;
+    justify-content: space-evenly;
+    padding: 5px;
+}
+
+
+.client-card-buttons {
+    display: flex;
+    height: 10vh;
+    align-items: center;
+    justify-content: space-evenly;
+  }
+  

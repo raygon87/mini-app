@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import ClientListComp from './ClientListComp';
-import InvoiceComp from './InvoiceComp';
+import ClientListComp from './Components/ClientListComp/ClientListComp';
+import InvoiceComp from './Components/InvoiceComp/InvoiceComp';
 
 class App extends Component {
   constructor() {

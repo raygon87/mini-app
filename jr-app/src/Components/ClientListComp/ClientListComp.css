@@ -1,0 +1,15 @@
+.clientListContainer {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    color: #fff;
+}
+
+.client-input {
+
+}
+
+.clientbox {
+    color: #fff;
+  }

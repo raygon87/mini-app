@@ -102,7 +102,7 @@ def update_client(id):
     client_data = {}
     client_data['first_name'] =  client.first_name
     client_data['last_name'] = client.last_name
-    return jsonify({'message':'client has been updated'})
+    return jsonify({'updatedClient': client_data})
 
 # delete client
 @app.route('/client/<id>', methods=['DELETE'])

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import "./App.css";
+import './InvoiceCardComp.css'
 
-class InvoicecardComp extends Component {
+class InvoiceCardComp extends Component {
     render() {
         return (
             <div className="invoice-card">
@@ -18,4 +18,4 @@ class InvoicecardComp extends Component {
         )};
 }
 
-export default InvoicecardComp;
+export default InvoiceCardComp;

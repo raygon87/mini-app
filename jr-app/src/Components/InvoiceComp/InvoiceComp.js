@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import "./App.css";
-import InvoicecardComp from "./InvoicecardComp";
+import InvoiceCardComp from "../InvoiceCardComp/InvoiceCardComp";
+import './InvoiceComp'
 
 class InvoiceComp extends Component {
     constructor() {
@@ -19,7 +19,7 @@ class InvoiceComp extends Component {
         if (this.state.display === 'invoice-card') {
             toShow = 
             <div className="container">
-                <InvoicecardComp name="invoice-card"/>
+                <InvoiceCardComp name="invoice-card"/>
             </div>
         }
         return (

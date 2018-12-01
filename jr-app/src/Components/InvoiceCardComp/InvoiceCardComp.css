@@ -1,0 +1,12 @@
+.invoice-card {
+    margin-top: 10px;
+    margin-right: 5px;
+    border: 2px white solid;
+    height: 30vh;
+    width: 25%;
+    margin: auto;
+}
+
+.invoice-name h1 {
+    text-align: left;
+}
