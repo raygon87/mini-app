@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import ClientListComp from './Components/ClientListComp/ClientListComp';
 import InvoiceComp from './Components/InvoiceComp/InvoiceComp';
+import SearchBox from './SearchBox';
 
 class App extends Component {
   constructor() {
@@ -10,57 +11,46 @@ class App extends Component {
     this.state = {
       display: '',
       searchField: '',
-      clients: ''
+      clients: []
     }
-    
-    this.clients = 
-      fetch(`http://localhost:5000/clients`)
+  }
+
+  componentDidMount() {
+    fetch(`http://localhost:5000/clients`)
       .then(response => response.json())
-      .then(data => {
-        this.clients = data.clients
-      })
+      .then(data => this.setState({clients: data.clients}))
       .catch(err => console.log(err,'error'))
   }
 
-  onClickClients = () => {
-    this.setState({ display: 'clients' });
+  fetchClients = () => {
+    fetch(`http://localhost:5000/clients`)
+      .then(response => response.json())
+      .then(data => this.setState({clients: data.clients}))
+      .catch(err => console.log(err,'error'))
   }
 
-  onClickInv = () => {
-    this.setState({ display: 'invoices' });
+  onChange = (event) => {
+    this.setState({searchField: event.target.value})
   }
-
 
   render() {
-    let toShow;
-    if(this.state.display === 'clients') {
-      toShow = 
-        <div className="container">
-            <ClientListComp clients={this.clients}/>
-        </div>
-    } else if (this.state.display === 'invoices') {
-      toShow = 
-        <div className="container">
-          <InvoiceComp name="invoices"/>
-        </div>
-    }; 
-    return ( 
+    console.log(this.state.clients)
+    const filteredClients = this.state.clients.filter(client => {
+        return client.first_name.toLowerCase().includes(this.state.searchField.toLowerCase());
+    });
+    return !this.state.clients.length ? <h1>Loading</h1> :
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
         </header>
         <div className="body">
           <div className="headings">
-            <h1 onClick={this.onClickClients}>Clients</h1>
-            <h1 onClick={this.onClickInv}>Invoices</h1>
+            <h1>Clients</h1>
           </div>
-          
-          {/* show clientlist or invoicde */}
-          <div> {toShow} </div>
+          <SearchBox searchChange={this.onChange}/>
+          <ClientListComp fetchClients={this.fetchClients} clients={filteredClients}/>
         </div>
       </div>
-      
-    );
   }
 }
 

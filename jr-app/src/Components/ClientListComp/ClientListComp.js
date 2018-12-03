@@ -6,7 +6,7 @@ import './ClientListComp.css'
 
 class ClientListComp extends Component {
     constructor(props) {
-        super(props)
+        super()
         this.state = {
           display: '',
           searchField: '',
@@ -21,12 +21,8 @@ class ClientListComp extends Component {
         this.setState({ display: 'new-client-card' });
     }
 
-
     render() {
-        // const {searchField} = this.state;
-        // const filteredClient = this.props.clients.filter(client => {
-        // return client.first_name.includes(searchField); 
-        // });
+        console.log(this.props.clients)
         let toShow;
         if (this.state.display === 'client-card') {
             toShow = 
@@ -36,15 +32,14 @@ class ClientListComp extends Component {
         } else if (this.state.display === 'new-client-card') {
             toShow = 
             <div className="container">
-                <NewClientComp name="new-client-card"/>
+                <NewClientComp fetchClients={this.props.fetchClients} name="new-client-card"/>
             </div>
         }
 
         return (
             <div className='clientbox'>
-                    Filter Client: <input id='searchInput'  onChange={this.onSearchChange} className="client-input"></input>
                     {/* <NewClientComp name="new-client-card"/> */}
-                    <button onClick={this.onClicknew}>Add New</button><br></br>
+                    <button onClick={this.onClicknew}>Add New Client</button><br></br>
                     <div> { toShow }</div>
                 <div className="clientListContainer">
                     {

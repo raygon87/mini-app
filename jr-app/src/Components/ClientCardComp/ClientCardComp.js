@@ -69,6 +69,7 @@ class ClientCardComp extends Component {
 
     render() {
         return (
+            
             <div className={"client-card client-card" + this.props.id}>
                 <div className="client-name">
                     <h3>{this.state.firstNameHeader}</h3> 

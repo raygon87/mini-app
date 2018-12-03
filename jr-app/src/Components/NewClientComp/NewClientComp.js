@@ -4,13 +4,13 @@ import './NewClientComp.css'
 class NewClientComp
  extends Component {
     constructor(props) {
-        super()
+        super(props)
         this.state = {
             firstNameInput:'',
             lastNameInput: ''
         }
     }
-
+ 
     onSubmit = () => {
         if(this.state.firstNameInput !== '' && this.state.lastNameInput !== '') {
             fetch('http://localhost:5000/client', {
@@ -23,12 +23,13 @@ class NewClientComp
             })
             .then(response => response.json())
             .then(data => {
-                console.log(data)
-            
+                let firstName = document.getElementById('first').value = ''
+                let lastName = document.getElementById('last').value = ''
+                this.props.fetchClients()
             })
         }
         else {
-            alert('Check the input fields!')
+            alert('Please check the input fields!')
         }
     }
 
@@ -41,7 +42,6 @@ class NewClientComp
     }
 
     render() {
-        console.log(this.props.fetchClients)
         return (
             <div className="client-new-card">
                 <div className="client-form">
